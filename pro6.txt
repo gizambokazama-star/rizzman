@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN FORM</title>
+</head>
+<body>
+    <h2>LOGIN FORM</h2>
+    <form action="" method="POST">
+        <label for="username">USERNAME: </label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">PASSWORD: </label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="login">
+    </form>
+</body>
+</html>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($username == 'admin' && $password == 'pass123') {
+        header("Location: home.php");
+        exit;
+    } else {
+        echo 'Invalid username or password.';
+    }
+}
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="profile_container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a8/PSG_College_of_Arts_and_Science_logo.png" alt="Profile picture">
+        <h1>PSGCAS</h1>
+        <p>DA</p>
+        <ul>
+            <li>Email: ragini@gmail.com</li>
+            <li>Phone: +91 6790357809</li>
+            <li>Location: CBE, INDIA</li>
+        </ul>
+        <a href="prog6.php">LOGOUT</a>
+    </div>
+</body>
+</html>

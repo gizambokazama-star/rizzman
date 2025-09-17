@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form action="prog02a.php" method="get">
+    1.Create <br> 2.Write <br> 3.Read <br> 4.Copy <br> 5.Delete <br><br>
+    Enter your choice:<br>
+    <input type="text" name="choice"><br>
+    Enter filename:<br>
+    <input type="text" name="filename"><br>
+    Enter content (if needed):<br>
+    <textarea name="content" rows="4" cols="30"></textarea><br><br>
+    <input type="submit" value="Submit"><br>
+</form>
+
+<?php
+if (isset($_GET['choice'], $_GET['filename'])) {
+    $choice = $_GET['choice'];
+    $file = $_GET['filename'];
+    $txt = $_GET['content'] ?? "";
+
+    switch ($choice) {
+        case 1:
+            fopen($file, "w") && print("File Created");
+            break;
+        case 2:
+            file_put_contents($file, $txt);
+            echo "Written";
+            break;
+        case 3:
+            echo file_exists($file) ? nl2br(file_get_contents($file)) : "Not Found";
+            break;
+        case 4:
+            copy($file, "copy_$file") ? print("Copied") : print("Copy Failed");
+            break;
+        case 5:
+            unlink($file) ? print("Deleted") : print("Delete Failed");
+            break;
+        default:
+            echo "<p>Invalid choice</p>";
+    }
+}
+?>
+</body>
+</html>
+
+------------------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<body>
+<form action="prog02b.php" method="get">
+1.String <br> 2.Math <br> 3.Date<br><br>
+Enter your choice:<input type="text" name="choice"><br><br>
+Input:<input type="text" name="input"><br><br>
+<input type="submit" value="Submit"><br><br>
+</form>
+<?php
+if (isset($_GET['choice'])) {
+    $choice = $_GET['choice'];
+    $in = $_GET['input'] ?? '';
+    switch ($choice) {
+        case 1:
+            echo "Length: " . strlen($in) . "<br>";
+            echo "Reverse: " . strrev($in) . "<br>";
+            echo "Upper: " . strtoupper($in) . "<br>";
+            break;
+        case 2:
+            $n = (float)$in;
+            echo "Absolute: " . abs($n) . "<br>";
+            echo "Square root: " . sqrt(abs($n)) . "<br>";
+            echo "Power: " . pow(abs($n), 2) . "<br>";
+            break;
+        case 3:
+            echo "Date: " . date("Y-m-d") . "<br>";
+            echo "Time: " . date("h:iA") . "<br>";
+            break;
+        default:
+            echo "<p>Invalid choice</p>";
+    }
+}
+?>
+</body>
+</html>
